@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<!-- Compiled and minified CSS -->
+<meta charset="UTF-8" />
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<!-- Compiled and minified JavaScript -->
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<link rel="icon" href="logochapinha.ico">
+	rel="stylesheet" />
+<link rel="icon" href="logochapinha.ico" />
 <title>Na Chapa</title>
 </head>
 <body>
@@ -25,7 +23,100 @@
 	</nav>
 
 	<div class="container">
-		<h1>Olá, mundo!</h1>
+		<h3>Cardápio</h3>
+		<div class="row" id="menu-container">
+
+			<div class="col s12 m3" th:each="produto : ${produtos}">
+
+				<a th:href="|#modal-${produto.id}|" style="color: black"
+					class="modal-trigger">
+					<div class="card">
+						<div class="card-image">
+							<img th:src="${produto.imagemUrl}" th:alt="${produto.nome}" />
+						</div>
+						<div class="card-content">
+							<p th:text="${produto.nome}">Nome do Produto</p>
+							<p>
+								<strong>R$ <span
+									th:text="${#numbers.formatDecimal(produto.precoBase, 1, 2, 'COMMA')}">20.00</span></strong>
+							</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
+
+	<div id="modal-container">
+
+		<div th:each="produto : ${produtos}" th:id="|modal-${produto.id}|"
+			class="modal" th:attr="data-preco-base=${produto.precoBase}">
+			<div class="modal-content">
+				<h4 th:text="${produto.nome}">Nome Produto</h4>
+				<h5>
+					Preço Base: R$ <span
+						th:text="${#numbers.formatDecimal(produto.precoBase, 1, 2, 'COMMA')}">20.00</span>
+				</h5>
+				<p>Selecione seus adicionais:</p>
+
+				<p th:each="adicional : ${produto.adicionais}">
+					<label> <input type="checkbox" class="adicional-check"
+						th:attr="data-preco=${adicional.preco}"
+						th:onchange="|calcularPreco('#modal-${produto.id}')|" /> <span>
+							<span th:text="${adicional.nome}">Adicional</span> (+ R$ <span
+							th:text="${#numbers.formatDecimal(adicional.preco, 1, 2, 'COMMA')}">3.00</span>)
+					</span>
+					</label>
+				</p>
+				<div class="divider" style="margin: 20px 0;"></div>
+
+				<h4>
+					Total: <span class="preco-total blue-text text-darken-2"> R$
+						<span
+						th:text="${#numbers.formatDecimal(produto.precoBase, 1, 2, 'COMMA')}">20.00</span>
+					</span>
+				</h4>
+			</div>
+
+			<div class="modal-footer">
+				<a href="#!" class="modal-close waves-effect waves-grey btn-flat">Cancelar</a>
+				<a href="#!" class="modal-close waves-effect waves-green btn">Adicionar
+					ao Pedido</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+  // (1) FUNÇÃO PARA CALCULAR O PREÇO DINÂMICO (lado do cliente)
+  function calcularPreco(modalId) {
+    const modal = document.querySelector(modalId);
+    // Pega o preço base que o Thymeleaf colocou no atributo 'data-preco-base'
+    const precoBase = parseFloat(modal.dataset.precoBase);
+    const precoTotalSpan = modal.querySelector(".preco-total");
+    
+    let precoAdicionais = 0;
+    
+    // Pega todos os checkboxes marcados *dentro deste modal*
+    const checkboxesMarcados = modal.querySelectorAll(".adicional-check:checked");
+
+    checkboxesMarcados.forEach(check => {
+      // Pega o preço que o Thymeleaf colocou no 'data-preco' de cada checkbox
+      precoAdicionais += parseFloat(check.dataset.preco);
+    });
+
+    let precoFinal = precoBase + precoAdicionais;
+    // Atualiza o HTML
+    precoTotalSpan.textContent = `R$ ${precoFinal.toFixed(2).replace('.', ',')}`;
+  }
+
+  // (2) INICIALIZAÇÃO DO MATERIALIZE
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa TODOS os modais que o Thymeleaf criou
+    var elems = document.querySelectorAll('.modal');
+    M.Modal.init(elems, {});
+    
+    // (Qualquer outra inicialização do Materialize que você precisar)
+  });
+</script>
 </body>
 </html>
