@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 <script
@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
 <link rel="icon" href="logochapinha.ico" />
-<title>Na Chapa</title>
+<title>Adicionar Produto</title>
 </head>
 <body>
 	<nav class="grey darken-2">
@@ -24,27 +24,7 @@
 	</nav>
 
 	<div class="container">
-		<h3>Cardápio</h3>
-		<table class="highlight">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Nome</th>
-					<th>Preço</th>
-					<th>Descrição</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="produto : ${produtos}">
-					<td th:text="${produto.id}">000</td>
-					<td th:text="${produto.nome}">Hamburguer</td>
-					<td th:text="${produto.preco}">Preço</td>
-					<td th:text="${produto.descricao}">Descrição</td>
-					<td th:text="${produto.status}">Esgotado</td>
-				</tr>
-			</tbody>
-		</table>
+		<h3>Adicionar Produto</h3>
 	</div>
 </body>
 </html>

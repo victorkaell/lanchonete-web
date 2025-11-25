@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminController {
 	
-	@GetMapping("/admin/produtos")
-	public String produtosAdmin() {
-		return "admin";
+	@GetMapping("/admin/produtos/adicionar")
+	public String formularioAdmin() {
+		return "admin/formProduto";
 	}
 }
