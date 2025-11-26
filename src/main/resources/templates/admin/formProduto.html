@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
@@ -25,6 +25,32 @@
 
 	<div class="container">
 		<h3>Adicionar Produto</h3>
+		<form action="/admin/produtos/adicionar" method="POST">
+			<div>
+				<input type="hidden" id="id" name="id" th:value="${produto.id}" readonly>
+							
+				<label for="nome">Nome:</label>
+				<input type="text" id="nome" name="nome" th:value="${produto.nome}" placeholder="X-Tudo">
+				
+				<label for="preco">Preço (R$):</label>
+				<input type="number" step=any min=0 id="preco" name="preco" th:value="${produto.preco}" placeholder="R$ 19,99">
+				
+				<label for="descricao">Descrição:</label>
+				<input type="text" id="descricao" name="descricao" th:value="${produto.descricao}" placeholder="Carne, frango, ovo, cebola, salada e dueto.">
+				
+				<label for="imagemurl">URL da Imagem:</label>
+				<input type="url" id="imagemURL" name="imagemURL" th:value="${produto.imagemURL}" placeholder="https://shutterstock.com/hamburguer">
+				
+				
+				<label for="status">Status:</label>
+				<input type="text" id="status" name="status" th:value="${produto.status}" placeholder="Disponível">
+			</div>
+						
+			<div>			
+				<button type="submit" class="green btn">Adicionar</button>
+				<button type="reset" class="red btn">Limpar</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
