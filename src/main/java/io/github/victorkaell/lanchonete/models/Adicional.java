@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Adicional {
@@ -14,6 +15,9 @@ public class Adicional {
 
 	private String nome;
 	private Double preco;
+	
+	@ManyToOne
+	private Produto produto;
 
 	public Long getId() {
 		return id;
@@ -39,8 +43,16 @@ public class Adicional {
 		this.preco = preco;
 	}
 
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
 	@Override
 	public String toString() {
-		return "Adicional [id=" + id + ", nome=" + nome + ", preco=" + preco + "]";
+		return "Adicional [id=" + id + ", nome=" + nome + ", preco=" + preco + ", produto=" + produto + "]";
 	}
 }
