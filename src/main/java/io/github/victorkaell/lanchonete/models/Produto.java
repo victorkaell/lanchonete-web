@@ -16,7 +16,7 @@ public class Produto {
 	private Double preco;
 	private String descricao;
 	private String imagemURL;
-	private String status;
+	private Boolean estaDisponivel;
 
 	public Long getId() {
 		return id;
@@ -58,17 +58,18 @@ public class Produto {
 		this.imagemURL = imagemURL;
 	}
 
-	public String getStatus() {
-		return status;
+	public Boolean getEstaDisponivel() {
+		return estaDisponivel;
 	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	
+	public void setEstaDisponivel(Boolean estaDisponivel) {
+		this.estaDisponivel = estaDisponivel;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Alimento [id=" + id + ", nome=" + nome + ", preco=" + preco + ", descricao=" + descricao
-				+ ", imagemURL=" + imagemURL + ", status=" + status + "]";
+				+ ", imagemURL=" + imagemURL + ", estaDisponivel=" + estaDisponivel + "]";
 	}
+
 }

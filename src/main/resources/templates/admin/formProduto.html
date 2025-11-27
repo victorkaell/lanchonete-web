@@ -25,29 +25,32 @@
 
 	<div class="container">
 		<h3>Adicionar Produto</h3>
-		<form action="/admin/produtos/adicionar" method="POST">
+		<form action="/admin/produtos/adicionar" th:object="${produto}" method="POST">
 			<div>
-				<input type="hidden" id="id" name="id" th:value="${produto.id}" readonly>
+				<input type="hidden" th:field="*{id}" readonly>
 							
 				<label for="nome">Nome:</label>
-				<input type="text" id="nome" name="nome" th:value="${produto.nome}" placeholder="X-Tudo">
+				<input type="text" th:field="*{nome}" placeholder="X-Tudo">
 				
 				<label for="preco">Preço (R$):</label>
-				<input type="number" step=any min=0 id="preco" name="preco" th:value="${produto.preco}" placeholder="R$ 19,99">
+				<input type="number" step=any min=0 th:field="*{preco}" placeholder="R$ 19,99">
 				
 				<label for="descricao">Descrição:</label>
-				<input type="text" id="descricao" name="descricao" th:value="${produto.descricao}" placeholder="Carne, frango, ovo, cebola, salada e dueto.">
+				<input type="text" th:field="*{descricao}" placeholder="Carne, frango, ovo, cebola, salada e dueto.">
 				
 				<label for="imagemurl">URL da Imagem:</label>
-				<input type="url" id="imagemURL" name="imagemURL" th:value="${produto.imagemURL}" placeholder="https://shutterstock.com/hamburguer">
+				<input type="url" th:field="*{imagemURL}" placeholder="https://shutterstock.com/hamburguer">
 				
-				
-				<label for="status">Status:</label>
-				<input type="text" id="status" name="status" th:value="${produto.status}" placeholder="Disponível">
+				<p>
+			      <label>
+			        <input type="checkbox" name="estaDisponivel" id="estaDisponivel" th:checked="${produto.estaDisponivel}" />
+			        <span>Disponível</span>
+			      </label>
+			    </p>
 			</div>
 						
 			<div>			
-				<button type="submit" class="green btn">Adicionar</button>
+				<button type="submit" class="green btn" >Adicionar</button>
 				<button type="reset" class="red btn">Limpar</button>
 			</div>
 		</form>

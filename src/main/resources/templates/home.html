@@ -33,7 +33,7 @@
 					<th>Preço (R$)</th>
 					<th>Descrição</th>
 					<th>URL (Imagem)</th>
-					<th>Status</th>
+					<th>Disponível</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
@@ -41,10 +41,10 @@
 				<tr th:each="produto : ${produtos}">
 					<td th:text="${produto.id}">000</td>
 					<td th:text="${produto.nome}">Hamburguer</td>
-					<td th:text="${produto.preco}">Preço</td>
+					<td th:text="${'R$ ' + #numbers.formatDecimal(produto.preco,0,2)}">Preço</td>
 					<td th:text="${produto.descricao}">Descrição</td>
 					<td th:text="${produto.imagemURL}">URL</td>
-					<td th:text="${produto.status}">Esgotado</td>
+					<td th:text="${produto.estaDisponivel}">Esgotado</td>
 					<td><a th:href="@{/admin/produtos/{idProduto}/editar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">edit</i></a>
 					<a th:href="@{/admin/produtos/{idProduto}/apagar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">delete</i></a></td>
 				</tr>

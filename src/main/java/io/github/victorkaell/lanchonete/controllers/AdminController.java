@@ -24,10 +24,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/produtos/adicionar")
-	public String adicionarProduto(Produto produto) {
+	public String salvarProduto(Produto produto) {
 		System.out.println(produto);
 		
 		pr.save(produto);
+		System.out.println("Produto salvo com sucesso!");
 		
 		return "redirect:/";
 	}
@@ -67,6 +68,7 @@ public class AdminController {
 		Produto produto = opt.get();
 		
 		pr.delete(produto);
+		System.out.println("Produto deletado com sucesso!");
 		
 		mv.setViewName("redirect:/");
 		
