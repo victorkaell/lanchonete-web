@@ -12,16 +12,7 @@
 <title>Na Chapa</title>
 </head>
 <body>
-	<nav class="grey darken-2">
-		<div class="nav-wrapper container">
-			<a href="#" class="brand-logo"><strong>Na Chapa</strong></a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="#"><i class="material-icons">search</i></a></li>
-				<li><a href="#"><i class="material-icons">local_mall</i></a></li>
-				<li><a href="/admin/produtos/adicionar"><i class="material-icons">add</i></a></li>
-			</ul>
-		</div>
-	</nav>
+	<div th:replace="~{/header :: header}"></div>
 
 	<div class="container">
 		<h3>Cardápio</h3>
@@ -44,9 +35,10 @@
 					<td th:text="${'R$ ' + #numbers.formatDecimal(produto.preco,0,2)}">Preço</td>
 					<td th:text="${produto.descricao}">Descrição</td>
 					<td th:text="${produto.imagemURL}">URL</td>
-					<td th:text="${produto.estaDisponivel}">Esgotado</td>
+					<td th:text="${produto.estaDisponivel} ? 'Disponível' : 'Esgotado'" >Esgotado</td>
 					<td><a th:href="@{/admin/produtos/{idProduto}/editar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">edit</i></a>
 					<a th:href="@{/admin/produtos/{idProduto}/apagar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">delete</i></a></td>
+					<td th:if="${produto.estaDisponivel} == true"><a th:href="@{/sacola/{idProduto}/adicionar(idProduto=${produto.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
 				</tr>
 			</tbody>
 		</table>
