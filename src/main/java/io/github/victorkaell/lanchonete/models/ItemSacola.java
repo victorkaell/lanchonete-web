@@ -20,6 +20,14 @@ public class ItemSacola {
 	private Usuario usuario;
 
 	private Integer quantidade;
+	
+	public ItemSacola() {}
+
+	public ItemSacola(Produto produto, Usuario usuario, Integer quantidade) {
+		this.produto = produto;
+		this.usuario = usuario;
+		this.quantidade = quantidade;
+	}
 
 	public Double getSubtotal() {
 		return produto.getPreco() * quantidade;
