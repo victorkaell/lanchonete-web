@@ -31,4 +31,10 @@ public class LoginController {
             return "redirect:/login?erro=true";
         }
 	}
+	
+	@GetMapping("/logout")
+    public String deslogar(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
 }
