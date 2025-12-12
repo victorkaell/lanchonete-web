@@ -46,7 +46,7 @@ public class SacolaController {
 	}
 	
 	@GetMapping("/sacola/{idProduto}/adicionar")
-    public String adicionar(@PathVariable Long idProduto, HttpSession session) {
+    public String adicionarProduto(@PathVariable Long idProduto, HttpSession session) {
 		
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         if (usuario == null) {
@@ -55,7 +55,7 @@ public class SacolaController {
 
         Optional<Produto> opt = pr.findById(idProduto);
         
-        if (opt.isEmpty()) {
+        if (opt.isEmpty()) { 	
         	return "redirect:/home";
         }
         
@@ -78,6 +78,59 @@ public class SacolaController {
                 
                 System.out.println("Novo item: " + novoItem);
             }
+        }
+        
+        return "redirect:/sacola";
+    }
+	
+	@GetMapping("/sacola/item/{idItem}/adicionar")
+    public String adicionarItem(@PathVariable Long idItem, HttpSession session) {
+		
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        if (usuario == null) {
+            return "redirect:/login";
+        }
+        
+        Optional<ItemSacola> opt = isr.findById(idItem);
+        
+        if (opt.isEmpty()) { 	
+        	return "redirect:/home";
+        }
+        
+        ItemSacola item = opt.get();
+        
+        System.out.println("Item a ser adicionado: " + item);
+        
+        item.setQuantidade(item.getQuantidade() + 1);
+        
+        isr.save(item);
+        
+        return "redirect:/sacola";
+    }
+	
+	@GetMapping("/sacola/item/{idItem}/remover")
+    public String removerItem(@PathVariable Long idItem, HttpSession session) {
+		
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        if (usuario == null) {
+            return "redirect:/login";
+        }
+
+        Optional<ItemSacola> opt = isr.findById(idItem);
+        
+        if (opt.isEmpty()) {
+        	return "redirect:/home";
+        }
+        
+        ItemSacola item = opt.get();
+        
+        System.out.println("Item a ser diminuído: " + item);
+        
+        if (item.getQuantidade() <= 1) {
+        	isr.delete(item);
+        } else {
+        	item.setQuantidade(item.getQuantidade() - 1);
+        	isr.save(item);
         }
         
         return "redirect:/sacola";

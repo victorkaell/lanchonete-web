@@ -34,8 +34,8 @@
 					<td th:text="${item.produto.descricao}">Descrição</td>
 					<td th:text="${item.produto.imagemURL}">URL</td>
 					<td th:text="${item.quantidade}">Quantidade</td>
-					<td><a th:href="@{/sacola/{idItem}/adicionar(idProduto=${item.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
-					<td><a th:href="@{/sacola/{idItem}/remover(idProduto=${item.id})}" class="btn-floating red"><i class="material-icons">remove</i></a></td>
+					<td><a th:href="@{/sacola/item/{idItem}/adicionar(idItem=${item.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
+					<td><a th:href="@{/sacola/item/{idItem}/remover(idItem=${item.id})}" class="btn-floating red"><i class="material-icons">remove</i></a></td>
 				</tr>
 			</tbody>
 		</table>
