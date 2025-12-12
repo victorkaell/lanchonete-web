@@ -18,6 +18,14 @@ public class Adicional {
 	
 	@ManyToOne
 	private Produto produto;
+	
+	public Adicional() {}
+	
+	public Adicional(String nome, Double preco, Produto produto) {
+		this.nome = nome;
+		this.preco = preco;
+		this.produto = produto;
+	}
 
 	public Long getId() {
 		return id;

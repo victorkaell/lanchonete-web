@@ -17,6 +17,16 @@ public class Produto {
 	private String descricao;
 	private String imagemURL;
 	private Boolean estaDisponivel;
+	
+	public Produto() {}
+	
+	public Produto(String nome, Double preco, String descricao, String imagemURL, Boolean estaDisponivel) {
+		this.nome = nome;
+		this.preco = preco;
+		this.descricao = descricao;
+		this.imagemURL = imagemURL;
+		this.estaDisponivel = estaDisponivel;
+	}
 
 	public Long getId() {
 		return id;
