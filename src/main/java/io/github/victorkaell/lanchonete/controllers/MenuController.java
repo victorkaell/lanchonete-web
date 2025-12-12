@@ -21,7 +21,7 @@ public class MenuController {
 	@Autowired
 	private AdicionalRepository ar;
 
-	@GetMapping("/")
+	@GetMapping("/home")
 	public ModelAndView inicio() {
 		ModelAndView mv = new ModelAndView();
 

@@ -30,7 +30,7 @@ public class AdminController {
 		pr.save(produto);
 		System.out.println("Produto salvo com sucesso!");
 		
-		return "redirect:/";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/admin/produtos/{idProduto}/editar")
@@ -40,7 +40,7 @@ public class AdminController {
 		Optional<Produto> opt = pr.findById(idProduto);
 		
 		if (opt.isEmpty()) {
-			mv.setViewName("redirect:/");
+			mv.setViewName("redirect:/home");
 			
 			return mv;
 		}
@@ -60,7 +60,7 @@ public class AdminController {
 		Optional<Produto> opt = pr.findById(idProduto);
 		
 		if (opt.isEmpty()) {
-			mv.setViewName("redirect:/");
+			mv.setViewName("redirect:/home");
 			
 			return mv;
 		}
@@ -70,7 +70,7 @@ public class AdminController {
 		pr.delete(produto);
 		System.out.println("Produto deletado com sucesso!");
 		
-		mv.setViewName("redirect:/");
+		mv.setViewName("redirect:/home");
 		
 		return mv;
 	}
