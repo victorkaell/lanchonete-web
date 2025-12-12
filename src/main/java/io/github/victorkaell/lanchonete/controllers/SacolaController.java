@@ -39,8 +39,18 @@ public class SacolaController {
 		
 		List<ItemSacola> itens = isr.findByUsuario(usuario);
 		
+		Double total = 0.0;
+		for (int i = 0; i < itens.size(); i++) {
+			ItemSacola item = itens.get(i);
+			
+			Double subtotal = item.getSubtotal();
+			
+			total += subtotal;
+		}
+		
 		mv.setViewName("sacola");
 		mv.addObject("itens", itens);
+		mv.addObject("total", total);
 		
 		return mv;
 	}
