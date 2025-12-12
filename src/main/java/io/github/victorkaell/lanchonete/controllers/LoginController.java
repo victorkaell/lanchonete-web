@@ -15,8 +15,13 @@ public class LoginController {
 	@Autowired
 	private UsuarioRepository ur;
 	
+	@GetMapping("/")
+	public String index() {
+		return "redirect:/login";
+	}
+	
 	@GetMapping("/login")
-	public String formularioLogin() {
+	public String formularioLogin(Usuario usuario) {
 		return "login";
 	}
 	
@@ -24,9 +29,11 @@ public class LoginController {
 	public String salvarLogin(String nome, String senha, HttpSession session) {
 		Usuario usuario = ur.findByNomeAndSenha(nome, senha);
 		
+		System.out.println(usuario);
+		
 		if (usuario != null) {
             session.setAttribute("usuarioLogado", usuario);
-            return "redirect:/";
+            return "redirect:/home";
         } else {
             return "redirect:/login?erro=true";
         }
