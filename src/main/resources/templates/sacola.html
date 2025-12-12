@@ -32,17 +32,23 @@
 			<tbody>
 				<tr th:each="item : ${itens}">
 					<td th:text="${item.produto.nome}">Nome</td>
-					<td th:text="${'R$ ' + #numbers.formatDecimal(item.produto.preco,0,2)}">Preço</td>
+					<td
+						th:text="${'R$ ' + #numbers.formatDecimal(item.produto.preco,0,2)}">Preço</td>
 					<td th:text="${item.produto.descricao}">Descrição</td>
 					<td th:text="${item.produto.imagemURL}">URL</td>
 					<td th:text="${item.quantidade}">Quantidade</td>
-					<td th:text="${'R$ ' + #numbers.formatDecimal(item.getSubtotal(),0,2)}">Subtotal</td>
-					<td><a th:href="@{/sacola/item/{idItem}/adicionar(idItem=${item.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
-					<td><a th:href="@{/sacola/item/{idItem}/remover(idItem=${item.id})}" class="btn-floating red"><i class="material-icons">remove</i></a></td>
+					<td
+						th:text="${'R$ ' + #numbers.formatDecimal(item.getSubtotal(),0,2)}">Subtotal</td>
+					<td><a
+						th:href="@{/sacola/item/{idItem}/adicionar(idItem=${item.id})}"
+						class="btn-floating green"><i class="material-icons">add</i></a></td>
+					<td><a
+						th:href="@{/sacola/item/{idItem}/remover(idItem=${item.id})}"
+						class="btn-floating red"><i class="material-icons">remove</i></a></td>
 				</tr>
 			</tbody>
 		</table>
-		
+
 		<div>
 			<h3>Total (R$)</h3>
 			<h5 th:text="${'R$ ' + #numbers.formatDecimal(total,0,2)}">TOTAL</h5>
