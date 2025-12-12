@@ -19,7 +19,6 @@
 		<table class="highlight">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>Nome</th>
 					<th>Preço (R$)</th>
 					<th>Descrição</th>
@@ -30,7 +29,6 @@
 			</thead>
 			<tbody>
 				<tr th:each="produto : ${produtos}">
-					<td th:text="${produto.id}">000</td>
 					<td th:text="${produto.nome}">Hamburguer</td>
 					<td th:text="${'R$ ' + #numbers.formatDecimal(produto.preco,0,2)}">Preço</td>
 					<td th:text="${produto.descricao}">Descrição</td>

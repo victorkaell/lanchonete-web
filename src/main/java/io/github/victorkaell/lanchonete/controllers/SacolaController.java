@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import io.github.victorkaell.lanchonete.models.ItemSacola;
@@ -36,6 +35,8 @@ public class SacolaController {
 			return mv;
 		}
 		
+		System.out.println(usuario);
+		
 		List<ItemSacola> itens = isr.findByUsuario(usuario);
 		
 		mv.setViewName("sacola");
@@ -44,21 +45,23 @@ public class SacolaController {
 		return mv;
 	}
 	
-	@PostMapping("/sacola/adicionar/{id}")
-    public String adicionar(@PathVariable Long id, HttpSession session) {
+	@GetMapping("/sacola/{idProduto}/adicionar")
+    public String adicionar(@PathVariable Long idProduto, HttpSession session) {
 		
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         if (usuario == null) {
             return "redirect:/login";
         }
 
-        Optional<Produto> opt = pr.findById(id);
+        Optional<Produto> opt = pr.findById(idProduto);
         
         if (opt.isEmpty()) {
-        	return "redirect:/";
+        	return "redirect:/home";
         }
         
         Produto produto = opt.get();
+        
+        System.out.println("Produto a ser adicionado: " + produto);
         
         if (produto != null) {
             
@@ -67,9 +70,13 @@ public class SacolaController {
             if (item != null) {
                 item.setQuantidade(item.getQuantidade() + 1);
                 isr.save(item);
+                
+                System.out.println("Item: " + item);
             } else {
                 ItemSacola novoItem = new ItemSacola(produto, usuario, 1);
                 isr.save(novoItem);
+                
+                System.out.println("Novo item: " + novoItem);
             }
         }
         

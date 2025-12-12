@@ -16,6 +16,29 @@
 
 	<div class="container">
 		<h3>Sacola</h3>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Preço (R$)</th>
+					<th>Descrição</th>
+					<th>URL (Imagem)</th>
+					<th>Quantidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item : ${itens}">
+					<td th:text="${item.produto.nome}">Nome</td>
+					<td th:text="${item.produto.preco}">Preço</td>
+					<td th:text="${item.produto.descricao}">Descrição</td>
+					<td th:text="${item.produto.imagemURL}">URL</td>
+					<td th:text="${item.quantidade}">Quantidade</td>
+					<td><a th:href="@{/sacola/{idItem}/adicionar(idProduto=${item.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
+					<td><a th:href="@{/sacola/{idItem}/remover(idProduto=${item.id})}" class="btn-floating red"><i class="material-icons">remove</i></a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>
