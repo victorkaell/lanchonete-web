@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,6 @@ import io.github.victorkaell.lanchonete.models.Produto;
 import io.github.victorkaell.lanchonete.models.Usuario;
 import io.github.victorkaell.lanchonete.repositories.ItemSacolaRepository;
 import io.github.victorkaell.lanchonete.repositories.ProdutoRepository;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SacolaController {
@@ -26,16 +26,8 @@ public class SacolaController {
 	private ItemSacolaRepository isr;;
 	
 	@GetMapping("/sacola")
-	public ModelAndView verSacola(HttpSession session) {
+	public ModelAndView verSacola(@AuthenticationPrincipal Usuario usuario) {
 		ModelAndView mv = new ModelAndView();
-		
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		if (usuario == null) {
-			mv.setViewName("redirect:/login");
-			return mv;
-		}
-		
-		System.out.println(usuario);
 		
 		List<ItemSacola> itens = isr.findByUsuario(usuario);
 		
@@ -56,12 +48,7 @@ public class SacolaController {
 	}
 	
 	@GetMapping("/sacola/{idProduto}/adicionar")
-    public String adicionarProduto(@PathVariable Long idProduto, HttpSession session) {
-		
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            return "redirect:/login";
-        }
+    public String adicionarProduto(@PathVariable Long idProduto, @AuthenticationPrincipal Usuario usuario) {
 
         Optional<Produto> opt = pr.findById(idProduto);
         
@@ -94,12 +81,7 @@ public class SacolaController {
     }
 	
 	@GetMapping("/sacola/item/{idItem}/adicionar")
-    public String adicionarItem(@PathVariable Long idItem, HttpSession session) {
-		
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            return "redirect:/login";
-        }
+    public String adicionarItem(@PathVariable Long idItem) {
         
         Optional<ItemSacola> opt = isr.findById(idItem);
         
@@ -119,12 +101,7 @@ public class SacolaController {
     }
 	
 	@GetMapping("/sacola/item/{idItem}/remover")
-    public String removerItem(@PathVariable Long idItem, HttpSession session) {
-		
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            return "redirect:/login";
-        }
+    public String removerItem(@PathVariable Long idItem) {
 
         Optional<ItemSacola> opt = isr.findById(idItem);
         
