@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link rel="icon" href="logochapinha.ico" />
+<title>Cadastro</title>
+</head>
+<body>
+	<div class="container">
+		<h3 class="center">Cadastro</h3>
+		<h6 class="center">Para fins de teste, utilize "TESTE" e "1234"</h6>
+		<form th:action="@{/cadastro}" th:object="${usuario}" method="POST">
+			<div>		
+				<label for="nome">Nome:</label>
+				<input type="text" th:field="*{nome}" placeholder="João">
+				
+				<label for="senha">Senha:</label>
+				<input type="password" th:field="*{senha}" placeholder="Ex: 12345678">
+				
+				 <div class="input-field col s12">
+				    <select class="browser-default" name="cargo" id="cargo">
+				      <option value="" disabled selected>Cargo</option>
+				      <option value="CLIENTE">Cliente</option>
+				      <option value="ADMIN">Administrador</option>
+				    </select>
+				  </div>
+			</div>
+						
+			<div>			
+				<button type="submit" class="green btn large" >Cadastrar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
