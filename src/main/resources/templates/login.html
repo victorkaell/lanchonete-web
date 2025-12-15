@@ -15,7 +15,7 @@
 	<div class="container">
 		<h3 class="center">Login</h3>
 		<h6 class="center">Para fins de teste, utilize "TESTE" e "1234"</h6>
-		<form action="/login" th:object="${usuario}" method="POST">
+		<form th:action="@{/login}" th:object="${usuario}" method="POST">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly>
 							
@@ -28,6 +28,7 @@
 						
 			<div>			
 				<button type="submit" class="green btn large" >Login</button>
+				<a th:href="@{/cadastro}" class="blue btn large right">Cadastro</a>
 			</div>
 		</form>
 	</div>

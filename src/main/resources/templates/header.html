@@ -8,12 +8,11 @@
 	<header th:fragment="header">
         <nav class="grey darken-2">
 			<div class="nav-wrapper container">
-				<a href="/home" class="brand-logo"><strong>Na Chapa</strong></a>
+				<a th:href="@{/home}" class="brand-logo"><strong>Na Chapa</strong></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="#"><i class="material-icons">search</i></a></li>
-					<li><a href="/sacola"><i class="material-icons">local_mall</i></a></li>
-					<li><a href="/admin/produtos/adicionar"><i class="material-icons">add</i></a></li>
-					<li><a href="/logout"><i class="material-icons">close</i></a></li>
+					<li><a th:href="@{/sacola}"><i class="material-icons">local_mall</i></a></li>
+					<li><a th:href="@{/admin/produtos/adicionar}"><i class="material-icons">add</i></a></li>
 				</ul>
 			</div>
 		</nav>

@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<h3>Adicionar Produto</h3>
-		<form action="/admin/produtos/adicionar" th:object="${produto}" method="POST">
+		<form th:action="@{/admin/produtos/adicionar}" th:object="${produto}" method="POST">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly>
 							
