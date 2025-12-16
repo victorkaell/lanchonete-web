@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -12,7 +12,8 @@
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="#"><i class="material-icons">search</i></a></li>
 					<li><a th:href="@{/sacola}"><i class="material-icons">local_mall</i></a></li>
-					<li><a th:href="@{/admin/produtos/adicionar}"><i class="material-icons">add</i></a></li>
+					<li sec:authorize="hasRole('COZINHA')"><a th:href="@{/cozinha/pedidos}"><i class="material-icons">restaurant</i></a></li>
+					<li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/produtos/adicionar}"><i class="material-icons">add</i></a></li>
 				</ul>
 			</div>
 		</nav>

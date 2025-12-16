@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
 <link rel="stylesheet"
@@ -24,7 +24,7 @@
 					<th>Descrição</th>
 					<th>URL (Imagem)</th>
 					<th>Disponível</th>
-					<th>Ações</th>
+					<th sec:authorize="hasRole('ADMIN')">Ações</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,7 +34,7 @@
 					<td th:text="${produto.descricao}">Descrição</td>
 					<td th:text="${produto.imagemURL}">URL</td>
 					<td th:text="${produto.estaDisponivel} ? 'Disponível' : 'Esgotado'" >Esgotado</td>
-					<td><a th:href="@{/admin/produtos/{idProduto}/editar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">edit</i></a>
+					<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/produtos/{idProduto}/editar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">edit</i></a>
 					<a th:href="@{/admin/produtos/{idProduto}/apagar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">delete</i></a></td>
 					<td th:if="${produto.estaDisponivel} == true"><a th:href="@{/sacola/{idProduto}/adicionar(idProduto=${produto.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
 				</tr>
