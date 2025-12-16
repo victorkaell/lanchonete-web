@@ -14,7 +14,6 @@
 <body>
 	<div class="container">
 		<h3 class="center">Login</h3>
-		<h6 class="center">Para fins de teste, utilize "TESTE" e "1234"</h6>
 		<form th:action="@{/login}" th:object="${usuario}" method="POST">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly>
