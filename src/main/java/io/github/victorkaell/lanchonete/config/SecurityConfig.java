@@ -16,8 +16,6 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                // Aqui usamos o seu atributo 'cargo'! 
-                // Se no banco estiver "ADMIN", o hasRole procura por "ROLE_ADMIN"
                 .requestMatchers("/admin/**").hasRole("ADMIN") 
                 .requestMatchers("/sacola/**").authenticated()
                 .anyRequest().permitAll()
