@@ -81,7 +81,7 @@ public class SacolaController {
     }
 	
 	@GetMapping("/sacola/item/{idItem}/adicionar")
-    public String adicionarItem(@PathVariable Long idItem) {
+    public String adicionarItem(@PathVariable Long idItem, @AuthenticationPrincipal Usuario usuario) {
         
         Optional<ItemSacola> opt = isr.findById(idItem);
         
@@ -93,15 +93,16 @@ public class SacolaController {
         
         System.out.println("Item a ser adicionado: " + item);
         
-        item.setQuantidade(item.getQuantidade() + 1);
-        
-        isr.save(item);
+        if (item.getUsuario().getId().equals(usuario.getId())) {
+        	item.setQuantidade(item.getQuantidade() + 1);
+        	isr.save(item);
+        }
         
         return "redirect:/sacola";
     }
 	
 	@GetMapping("/sacola/item/{idItem}/remover")
-    public String removerItem(@PathVariable Long idItem) {
+    public String removerItem(@PathVariable Long idItem, @AuthenticationPrincipal Usuario usuario) {
 
         Optional<ItemSacola> opt = isr.findById(idItem);
         
@@ -112,6 +113,10 @@ public class SacolaController {
         ItemSacola item = opt.get();
         
         System.out.println("Item a ser diminuído: " + item);
+        
+        if (!item.getUsuario().getId().equals(usuario.getId())) {
+        	return "redirect:/sacola";
+        }
         
         if (item.getQuantidade() <= 1) {
         	isr.delete(item);
