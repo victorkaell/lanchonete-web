@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -20,14 +22,21 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotBlank(message = "O nome não pode estar vazio.")
+	@Size(min = 3, max = 100, message = "O nome precisa ter entre 3 e 100 caracteres.")
 	private String nome;
+	
+	@NotBlank(message = "A senha é obrigatória.")
+	@Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres.")
 	private String senha;
+	
+	@NotBlank(message = "O cargo não pode estar vazio.")
 	private String cargo;
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if (this.cargo == null) {
-	        return List.of(new SimpleGrantedAuthority("ROLE_CLIENTE")); // Define um padrão seguro
+	        return List.of(new SimpleGrantedAuthority("ROLE_CLIENTE"));
 	    }
 		
 		return List.of(new SimpleGrantedAuthority("ROLE_" + this.cargo.toUpperCase()));

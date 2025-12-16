@@ -4,6 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Produto {
@@ -11,11 +15,22 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotBlank(message = "O nome não pode estar vazio.")
+	@Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
 	private String nome;
+	
+	@NotNull(message = "O preço é obrigatório.")
+	@Min(value = 0, message = "O preço não pode ser negativo.")
 	private Double preco;
+	
+	@NotBlank(message = "A descrição é obrigatória.")
+	@Size(max = 255, message = "A descrição deve ser curta.")
 	private String descricao;
+	
+	@NotBlank(message = "A URL da imagem é obrigatória.")
 	private String imagemURL;
+	
 	private Boolean estaDisponivel;
 	
 	public Produto() {}

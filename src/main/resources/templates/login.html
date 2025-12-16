@@ -18,12 +18,18 @@
 		<form th:action="@{/login}" th:object="${usuario}" method="POST">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly>
-							
-				<label for="nome">Nome:</label>
-				<input type="text" th:field="*{nome}" placeholder="João">
 				
-				<label for="senha">Senha:</label>
-				<input type="password" th:field="*{senha}" placeholder="Ex: 12345678">
+				<div>				
+					<label for="nome">Nome:</label>
+					<input type="text" th:field="*{nome}" placeholder="João" autofocus>
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+				</div>			
+				
+				<div>				
+					<label for="senha">Senha:</label>
+					<input type="password" th:field="*{senha}" placeholder="Ex: 12345678">
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></span>
+				</div>
 			</div>
 						
 			<div>			

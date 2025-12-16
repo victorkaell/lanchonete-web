@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class ItemSacola {
@@ -13,12 +15,16 @@ public class ItemSacola {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
 	@ManyToOne
 	private Produto produto;
-
+	
+	@NotNull
 	@ManyToOne
 	private Usuario usuario;
-
+	
+	@NotNull(message = "Você deve indicar a quantidade.")
+	@Min(value = 0, message = "A quantidade deve ser no mínimo 0.")
 	private Integer quantidade;
 	
 	public ItemSacola() {}

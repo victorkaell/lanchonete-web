@@ -16,17 +16,24 @@
 		<h3 class="center">Cadastro</h3>
 		<h6 class="center">Para fins de teste, utilize "TESTE" e "1234"</h6>
 		<form th:action="@{/cadastro}" th:object="${usuario}" method="POST">
-			<div>		
-				<label for="nome">Nome:</label>
-				<input type="text" th:field="*{nome}" placeholder="João">
+			<div>
+				<div>				
+					<label for="nome">Nome:</label>
+					<input type="text" th:field="*{nome}" placeholder="João" autofocus>
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+				</div>		
 				
-				<label for="senha">Senha:</label>
-				<input type="password" th:field="*{senha}" placeholder="Ex: 12345678">
+				<div>				
+					<label for="senha">Senha:</label>
+					<input type="password" th:field="*{senha}" placeholder="Ex: 12345678">
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></span>
+				</div>
 				
 				 <div class="input-field col s12">
 				    <select class="browser-default" name="cargo" id="cargo">
 				      <option value="" disabled selected>Cargo</option>
 				      <option value="CLIENTE">Cliente</option>
+				      <option value="COZINHA">Cozinha</option>
 				      <option value="ADMIN">Administrador</option>
 				    </select>
 				  </div>

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import io.github.victorkaell.lanchonete.models.Produto;
 import io.github.victorkaell.lanchonete.repositories.ProdutoRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class AdminController {
@@ -24,7 +26,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/produtos/adicionar")
-	public String salvarProduto(Produto produto) {
+	public String salvarProduto(@Valid Produto produto, BindingResult result) {
+		if (result.hasErrors()) {
+			return "admin/formProduto";
+		}
+		
 		System.out.println(produto);
 		
 		pr.save(produto);

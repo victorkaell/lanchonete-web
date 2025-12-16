@@ -5,6 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Adicional {
@@ -12,10 +16,16 @@ public class Adicional {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotBlank(message = "O nome não deve estar vazio.")
+	@Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.")
 	private String nome;
+	
+	@NotNull(message = "O preço é obrigatório.")
+	@Min(value = 0, message = "O preço não pode ser negativo.")
 	private Double preco;
 	
+	@NotNull
 	@ManyToOne
 	private Produto produto;
 	

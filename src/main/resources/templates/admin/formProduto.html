@@ -19,22 +19,34 @@
 		<form th:action="@{/admin/produtos/adicionar}" th:object="${produto}" method="POST">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly>
-							
-				<label for="nome">Nome:</label>
-				<input type="text" th:field="*{nome}" placeholder="X-Tudo">
 				
-				<label for="preco">Preço (R$):</label>
-				<input type="number" step=any min=0 th:field="*{preco}" placeholder="R$ 19,99">
+				<div>				
+					<label for="nome">Nome:</label>
+					<input type="text" th:field="*{nome}" placeholder="X-Tudo" autofocus/>
+	                <span class="helper-text red-text" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+				</div>			
 				
-				<label for="descricao">Descrição:</label>
-				<input type="text" th:field="*{descricao}" placeholder="Carne, frango, ovo, cebola, salada e dueto.">
+				<div>				
+					<label for="preco">Preço (R$):</label>
+					<input type="number" step=any th:field="*{preco}" placeholder="R$ 19,99">
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>
+				</div>
 				
-				<label for="imagemurl">URL da Imagem:</label>
-				<input type="url" th:field="*{imagemURL}" placeholder="https://shutterstock.com/hamburguer">
+				<div>				
+					<label for="descricao">Descrição:</label>
+					<input type="text" th:field="*{descricao}" placeholder="Carne, frango, ovo, cebola, salada e dueto.">
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></span>
+				</div>
+				
+				<div>				
+					<label for="imagemURL">URL da Imagem:</label>
+					<input type="url" th:field="*{imagemURL}" placeholder="https://shutterstock.com/hamburguer">
+					<span class="helper-text red-text" th:if="${#fields.hasErrors('imagemURL')}" th:errors="*{imagemURL}"></span>
+				</div>
 				
 				<p>
 			      <label>
-			        <input type="checkbox" name="estaDisponivel" id="estaDisponivel" th:checked="${produto.estaDisponivel}" />
+			        <input type="checkbox" name="estaDisponivel" id="estaDisponivel" th:checked="${produto.estaDisponivel}">
 			        <span>Disponível</span>
 			      </label>
 			    </p>
