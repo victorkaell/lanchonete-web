@@ -1,1 +1,0 @@
-INSERT IGNORE INTO usuario (nome, senha, cargo) VALUES ('TESTE', '1234', 'CLIENTE');
