@@ -11,7 +11,7 @@
 				<a th:href="@{/home}" class="brand-logo"><strong>Na Chapa</strong></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="#"><i class="material-icons">search</i></a></li>
-					<li><a th:href="@{/sacola}"><i class="material-icons">local_mall</i></a></li>
+					<li sec:authorize="!hasAnyRole('ADMIN', 'COZINHA')"><a th:href="@{/sacola}"><i class="material-icons">local_mall</i></a></li>
 					<li sec:authorize="hasRole('COZINHA')"><a th:href="@{/cozinha/pedidos}"><i class="material-icons">restaurant</i></a></li>
 					<li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/produtos/adicionar}"><i class="material-icons">add</i></a></li>
 				</ul>
