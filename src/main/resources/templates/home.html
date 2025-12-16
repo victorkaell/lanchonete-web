@@ -36,10 +36,14 @@
 					<td th:text="${produto.estaDisponivel} ? 'Disponível' : 'Esgotado'" >Esgotado</td>
 					<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/produtos/{idProduto}/editar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">edit</i></a>
 					<a th:href="@{/admin/produtos/{idProduto}/apagar(idProduto=${produto.id})}" style="color:black"><i class="material-icons">delete</i></a></td>
-					<td th:if="${produto.estaDisponivel} == true"><a th:href="@{/sacola/{idProduto}/adicionar(idProduto=${produto.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
+					<td sec:authorize="!hasAnyRole('ADMIN', 'COZINHA')" th:if="${produto.estaDisponivel} == true"><a th:href="@{/sacola/{idProduto}/adicionar(idProduto=${produto.id})}" class="btn-floating green"><i class="material-icons">add</i></a></td>
 				</tr>
 			</tbody>
 		</table>
+
+		<form th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()" style="margin-top: 20px">
+			<button type="submit" class="red btn large right"><i class="material-icons left">exit_to_app</i> LOGOUT</button>
+		</form>
 	</div>
 </body>
 </html>
