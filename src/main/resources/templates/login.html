@@ -14,6 +14,9 @@
 <body>
 	<div class="container">
 		<h3 class="center">Login</h3>
+		<h6 class="center">Teste com 'CLIENTE' '12345678'</h6>
+		<h6 class="center">Teste com 'COZINHA' '12345678'</h6>
+		<h6 class="center">Teste com 'ADMIN' '12345678'</h6>
 		<form th:action="@{/login}" th:object="${usuario}" method="POST">
 			<div>
 				<input type="hidden" th:field="*{id}" readonly>
