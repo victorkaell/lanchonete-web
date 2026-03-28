@@ -15,11 +15,12 @@ Aplicação web simulando o ecossistema de uma lanchonete online. Este projeto f
 * Validação rigorosa de dados inseridos pelo usuário no back-end.
 
 ## 🛠️ Como executar este projeto
-1. Clone este repositório: `git clone github.com/victorkaell/ocorrencias`
+
+1. Clone este repositório: `git clone https://github.com/victorkaell/lanchonete-web`
 2. Atualize o arquivo `application.properties` com as informações do seu banco de dados MySQL local.
-3. Inicie a aplicação Spring Boot (o Hibernate criará as tabelas necessárias automaticamente).
+3. Inicie a aplicação Spring Boot (o Hibernate criará as tabelas e o `import.sql` populará os produtos e usuários automaticamente).
 4. Acesse a aplicação no navegador via `http://localhost:8080`.
-5. **Primeiro Acesso:** Vá até a página de registro e entre com um novo usuário, selecionando o cargo desejado (ex: ADMIN ou COZINHA) na própria interface para ter acesso às rotas protegidas pelo Spring Security.
+5. **Primeiro Acesso:** Não é necessário criar uma conta. Utilize as credenciais de teste listadas abaixo para fazer o login diretamente e explorar os diferentes níveis de acesso.
 
 ### 🔑 Credenciais de Teste e Controle de Acesso
 
