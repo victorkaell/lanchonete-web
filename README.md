@@ -19,7 +19,7 @@ Aplicação web simulando o ecossistema de uma lanchonete online. Este projeto f
 2. Atualize o arquivo `application.properties` com as informações do seu banco de dados MySQL local.
 3. Inicie a aplicação Spring Boot (o Hibernate criará as tabelas necessárias automaticamente).
 4. Acesse a aplicação no navegador via `http://localhost:8080`.
-5. **Primeiro Acesso:** Vá até a página de registro e crie um novo usuário, selecionando o cargo desejado (ex: ADMIN ou COZINHA) na própria interface para ter acesso às rotas protegidas pelo Spring Security.
+5. **Primeiro Acesso:** Vá até a página de registro e entre com um novo usuário, selecionando o cargo desejado (ex: ADMIN ou COZINHA) na própria interface para ter acesso às rotas protegidas pelo Spring Security.
 
 ### 🔑 Credenciais de Teste e Controle de Acesso
 
